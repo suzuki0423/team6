@@ -1,15 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class bee here.
+ * Write a description of class C here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class bee extends Actor
+public class C extends Actor
 {
     /**
-     * Act - do whatever the bee wants to do. This method is called whenever
+     * Act - do whatever the C wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
