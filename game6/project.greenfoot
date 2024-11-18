@@ -2,11 +2,11 @@
 class.A.image=bananas.png
 class.B.image=ant3.png
 class.C.image=bee.png
-class.MyWorld.image=desert_sunset10.png
-editor.fx.0.height=739
-editor.fx.0.width=816
-editor.fx.0.x=947
-editor.fx.0.y=114
+class.MyWorld.image=haikei.png
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
 height=611
 package.numDependencies=0
 package.numTargets=4
