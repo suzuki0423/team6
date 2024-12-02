@@ -14,7 +14,7 @@ public class Alivel extends Actor
      */
     public void act() 
     {
-        getImage().scale(100,100);
+        getImage().scale(60,60);
        
         
         int x = getX();
