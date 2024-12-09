@@ -30,7 +30,10 @@ public class MyWorld extends World
         addObject(enemy1, 850, 100);  // 右端に配置
         addObject(enemy2, 850, 200);  // 右端に配置
         addObject(enemy3, 850, 300);  // 右端に配置
+        
         addObject(alivel, 100, 100);
+        
+
     }
 
     public void act()
