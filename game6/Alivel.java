@@ -16,7 +16,7 @@ public class Alivel extends Actor
     {
         getImage().scale(60,60);
        
-        
+        int n = 0;
         int x = getX();
         int y = getY();
         
@@ -29,6 +29,7 @@ public class Alivel extends Actor
         Actor enemy =getOneIntersectingObject(ENEMY.class);
         if(enemy != null){
             getWorld().removeObject(enemy);
+            n++;
         }
         
     }
