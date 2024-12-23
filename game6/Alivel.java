@@ -1,11 +1,5 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // Greenfootのライブラリをインポート
 
-/**
- * Write a description of class Alivel here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Alivel extends Actor
 {
     /**
@@ -14,24 +8,39 @@ public class Alivel extends Actor
      */
     public void act() 
     {
-        getImage().scale(60,60);
+        // アクターの画像を60x60にスケール
+        getImage().scale(60, 60);
        
-        int n = 0;
         int x = getX();
         int y = getY();
         
-        if( Greenfoot.isKeyDown( "up" ) ){
-                setLocation( x,y-5 );
-            }
-        if( Greenfoot.isKeyDown( "down" ) ){
-            setLocation( x,y+5 );
-            } 
-        Actor enemy =getOneIntersectingObject(ENEMY.class);
-        if(enemy != null){
-            getWorld().removeObject(enemy);
-            n++;
+        // 上矢印キーで上移動、下矢印キーで下移動
+        if (Greenfoot.isKeyDown("up")) {
+            setLocation(x, y - 5);
         }
-        
+        if (Greenfoot.isKeyDown("down")) {
+            setLocation(x, y + 5);
+        } 
+
+        // ENEMYクラスのオブジェクトと衝突した場合
+        Actor enemy = getOneIntersectingObject(ENEMY.class);
+        if (enemy != null) {
+            // 衝突した敵のスコア値を取得
+            ENEMY theEnemy = (ENEMY) enemy;
+            int enemyValue = theEnemy.getValue();
+            
+            // スコアを増加
+            MyWorld world = (MyWorld) getWorld();  // 現在のワールドを取得
+            world.increaseScore(enemyValue);  // 衝突した敵のスコア値分を増加
+
+            // 衝突したエネミーをワールドから削除
+            getWorld().removeObject(enemy);
+            
+            // 衝突したエネミーのスコアテキストも削除
+            Actor scoreText = getOneIntersectingObject(TextActor.class);
+            if (scoreText != null) {
+                getWorld().removeObject(scoreText);  // スコアテキストを削除
+            }
+        }
     }
-    
 }

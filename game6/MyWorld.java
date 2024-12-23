@@ -2,51 +2,81 @@ import greenfoot.*;  // Greenfootのライブラリをインポート
 
 public class MyWorld extends World
 {
-    private ENEMY enemy1;
-    private ENEMY enemy2;
-    private ENEMY enemy3;
     private Alivel alivel;
     private static long start_ = 0;
-    private long lastSpawnTime = 0;  // Time when enemies were last spawned
+    private long lastSpawnTime = 0;
+    private int score = 0;
+    private boolean firstSpawn = true;
 
-    // Start the timer
     public static void start() {
         start_ = System.nanoTime();
     }
 
-    // Get the elapsed time in seconds
     public static long secondTime() {
         return (System.nanoTime() - start_) / 1000000000;
     }
 
     public MyWorld()
     {    
-        // Initialize the world with dimensions
         super(850, 450, 1); 
         
-        // Create the objects
-        enemy1 = new ENEMY();
-        enemy2 = new ENEMY();
-        enemy3 = new ENEMY();
         alivel = new Alivel();
-        
-        // Add the Alivel actor at a specific location
         addObject(alivel, 100, 100);
-
-        // Record the initial time
+        
         lastSpawnTime = secondTime();
+        showText("Score: " + score, 50, 20);
     }
-
+    
+    public void increaseScore(int amount)
+    {
+        score += amount;
+        showText("Score: " + score, 50, 20);
+    }
+    
+    public int getScore()
+    {
+        return score;
+    }
+    
     public void act()
     {
-        // Check if 10 seconds have passed
         if (secondTime() - lastSpawnTime >= 10) {
-            // Add enemies to the world at the right edge
-            addObject(enemy1, 850, 100);
-            addObject(enemy2, 850, 200);
-            addObject(enemy3, 850, 300);
-            
-            // Update the last spawn time
+            if (firstSpawn) {
+                // 最初のスポーン、スコア10, 15, 20
+                ENEMY enemy1 = new ENEMY(10);
+                ENEMY enemy2 = new ENEMY(15);
+                ENEMY enemy3 = new ENEMY(20);
+
+                // 敵をワールドに追加
+                addObject(enemy1, 850, 100);
+                addObject(enemy2, 850, 200);
+                addObject(enemy3, 850, 300);
+
+                // スコアテキストを表示
+                enemy1.spawnScoreText();
+                enemy2.spawnScoreText();
+                enemy3.spawnScoreText();
+
+                // 最初のスポーンフラグをfalseに設定
+                firstSpawn = false;
+            } else {
+                // プレイヤーのスコアに応じて敵のスコアを設定
+                int playerScore = getScore();
+                ENEMY enemy1 = new ENEMY(playerScore - 5);
+                ENEMY enemy2 = new ENEMY(playerScore);
+                ENEMY enemy3 = new ENEMY(playerScore + 5);
+
+                // 敵をワールドに追加
+                addObject(enemy1, 850, 100);
+                addObject(enemy2, 850, 200);
+                addObject(enemy3, 850, 300);
+
+                // スコアテキストを表示
+                enemy1.spawnScoreText();
+                enemy2.spawnScoreText();
+                enemy3.spawnScoreText();
+            }
+
             lastSpawnTime = secondTime();
         }
     }
